@@ -15,9 +15,9 @@ if (!aarFile.exists()) {
 def publishArtifact = artifacts.add("default", aarFile)
 
 // Artifact parameters
-def sdkGroupId = 'com.heartlandpaymentsystems'
+def sdkGroupId = 'com.globalpayments'
 def sdkArtifactId = 'globalpayments-bbpos'
-def sdkVersion = '1.0.8'
+def sdkVersion = '1.0.9'
 
 afterEvaluate {
     publishing {
@@ -33,7 +33,7 @@ afterEvaluate {
                 pom {
                     name = sdkArtifactId
                     description = 'BBPos library for supporting the Global Payments Android device library.'
-                    url = 'https://developer.globalpay.com/'
+                    url = 'https://developer.globalpayments.com/'
 
                     licenses {
                         license {
@@ -75,7 +75,7 @@ afterEvaluate {
         pom {
             name = sdkArtifactId
             description = 'BBPos library for supporting the Global Payments Android device library.'
-            url = 'https://developer.globalpay.com/'
+            url = 'https://developer.globalpayments.com/'
             licenses {
                 license {
                     name = 'The MIT License (MIT)'

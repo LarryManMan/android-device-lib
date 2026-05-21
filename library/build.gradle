@@ -6,17 +6,17 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
     namespace 'com.globalpayments.library'
     buildFeatures {
         buildConfig true
     }
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 30
-        versionCode 33
-        versionName "2.0.4"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 32
+        versionName "2.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -54,16 +54,23 @@ android {
     }
 
 }
-
+/*configurations {
+    // Exclude duplicate modules when using local jar for java-sdk
+    all*.exclude module: 'joda-time'
+    all*.exclude module: 'lombok'
+    all*.exclude module: 'commons-codec'
+    all*.exclude module: 'httpcore'
+    all*.exclude module: 'httpmime'
+}*/
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.google.android.material:material:1.2.0-alpha06'
+    implementation "androidx.work:work-runtime:2.7.1"
     // Global payments SDK
-    implementation 'com.heartlandpaymentsystems:globalpayments-sdk:14.2.8'
-    //implementation files('libs/globalpayments-sdk.jar')
+    implementation 'com.globalpayments:globalpayments-sdk:15.1.13'
 
     /** Vital SDK dependencies - Start **/
     //switch out commented code to change between local and hosted vital libs
@@ -74,17 +81,15 @@ dependencies {
     api project(path: ':vital-sdk:roamreader')
     api project(path: ':vital-sdk:transaction-manager')
     api project(path: ':vital-sdk:database-portico')
-    api project(path: ':vital-sdk:temlibrary')
-    api project(path: ':vital-sdk:ruadeviceservice')*/
-    api 'com.heartlandpaymentsystems:globalpayments-bbpos:1.0.8'
-    api 'com.heartlandpaymentsystems:globalpayments-core:1.0.16'
-    api 'com.heartlandpaymentsystems:globalpayments-ingenico:1.0.16'
-    api 'com.heartlandpaymentsystems:globalpayments-portico:1.0.18'
-    api 'com.heartlandpaymentsystems:globalpayments-roamreader:1.0.4'
-    api 'com.heartlandpaymentsystems:globalpayments-ruadeviceservice:1.0.0'
-    api 'com.heartlandpaymentsystems:globalpayments-temlibrary:1.0.0'
-    api 'com.heartlandpaymentsystems:globalpayments-database-portico:1.0.3'
-    api 'com.heartlandpaymentsystems:globalpayments-transaction-manager:1.0.19'
+    api project(path: ':vital-sdk:temlibrary')*/
+    api 'com.globalpayments:globalpayments-bbpos:1.0.9'
+    api 'com.globalpayments:globalpayments-core:1.0.17'
+    api 'com.globalpayments:globalpayments-ingenico:1.0.17'
+    api 'com.globalpayments:globalpayments-portico:1.0.19'
+    api 'com.globalpayments:globalpayments-roamreader:1.0.5'
+    api 'com.globalpayments:globalpayments-temlibrary:1.0.1'
+    api 'com.globalpayments:globalpayments-database-portico:1.0.4'
+    api 'com.globalpayments:globalpayments-transaction-manager:1.0.20'
 
     // Apache Commons
     //implementation 'commons-codec:commons-codec:1.13'
@@ -96,19 +101,22 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Google GSON
-    api 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.google.code.gson:gson:2.8.4'
+
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     /** Vital SDK dependencies - End **/
 
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:core:1.3.0-rc01'
+    androidTestImplementation 'androidx.test:core:1.5.0'
     androidTestImplementation 'androidx.test:runner:1.3.0-rc01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-rc01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2-rc01'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1"
 
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
@@ -142,7 +150,7 @@ dependencies {
 import com.vanniktech.maven.publish.SonatypeHost
 
 // Artifact parameters
-def sdkGroupId = 'com.heartlandpaymentsystems'
+def sdkGroupId = 'com.globalpayments'
 def sdkArtifactId = 'android-device-lib'
 def sdkVersion = android.defaultConfig.versionName
 
@@ -161,7 +169,7 @@ afterEvaluate {
                 pom {
                     name = sdkArtifactId
                     description = 'The official Global Payments Android Device Library.'
-                    url = 'https://developer.globalpay.com/'
+                    url = 'https://developer.globalpayments.com/'
 
                     licenses {
                         license {

@@ -2,6 +2,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.0.5] - 2026-05-21
+ 
+### Added
+
+### Changed
+- Updated Ingenico RUA library from 2.4.11.2 to 2.6.1.6.
+- Updated maven group/package to com.globalpayments (previously com.heartlandpaymentsystems).
+### Fixed
+
+
 ## [2.0.4] - 2026-04-23
  
 ### Added
